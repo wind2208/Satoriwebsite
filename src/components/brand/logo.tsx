@@ -5,7 +5,7 @@ export function Logo({ className, withWordmark = true }: { className?: string; w
     <span className={cn('inline-flex items-center gap-2.5', className)}>
       <span
         aria-hidden
-        className="grid size-7 place-items-center rounded-full bg-gradient-to-br from-brand to-brand-soft text-[12px] font-semibold text-text-primary"
+        className="grid size-7 place-items-center rounded-full bg-gradient-to-br from-brand to-brand-soft text-[12px] font-medium text-text-primary"
       >
         S
       </span>

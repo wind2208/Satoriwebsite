@@ -61,7 +61,7 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #a8b5c7;
   --color-text-tertiary: #6b8ab5;
-  --color-text-muted: #4a5a75;
+  --color-text-muted: #7790ad;
 
   /* Brand accent(改名 brand 避免跟 shadcn 的 accent 衝突) */
   --color-brand: #3d7bcc;

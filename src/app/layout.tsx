@@ -8,13 +8,13 @@ import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500'],
   variable: '--font-inter',
   display: 'swap',
 });
 
 const notoTC = Noto_Sans_TC({
-  weight: ['400', '500', '600'],
+  weight: ['400', '500'],
   variable: '--font-noto-tc',
   display: 'swap',
   preload: false,
@@ -22,7 +22,7 @@ const notoTC = Noto_Sans_TC({
 
 const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
-  weight: ['400', '500'],
+  weight: ['400'],
   variable: '--font-jetbrains',
   display: 'swap',
 });
