@@ -74,10 +74,14 @@
   --color-danger: #ef4444;
 
   /* ── Typography ───────────────────────────────────────────────── */
+  /* CJK 走系統字而非 Google Fonts:render-blocking 從 ~5s 降到 0,
+   * 視覺差異對台灣讀者反而更熟悉(macOS PingFang TC / Windows JhengHei) */
   --font-sans:
-    var(--font-inter), var(--font-noto-tc), ui-sans-serif, system-ui, -apple-system,
-    'Segoe UI', sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+    var(--font-inter), -apple-system, BlinkMacSystemFont, 'PingFang TC',
+    'Microsoft JhengHei', 'Noto Sans TC', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
   --font-heading: var(--font-sans);
 
   /* Type scale(對應 CLAUDE.md §3.2) */

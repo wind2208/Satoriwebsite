@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono, Noto_Sans_TC } from 'next/font/google';
+import { Inter } from 'next/font/google';
 
 import { Footer } from '@/components/layout/footer';
 import { Header } from '@/components/layout/header';
@@ -10,20 +10,6 @@ const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-inter',
-  display: 'swap',
-});
-
-const notoTC = Noto_Sans_TC({
-  weight: ['400', '500'],
-  variable: '--font-noto-tc',
-  display: 'swap',
-  preload: false,
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-jetbrains',
   display: 'swap',
 });
 
@@ -67,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="zh-Hant-TW"
-      className={`${inter.variable} ${notoTC.variable} ${jetbrains.variable} h-full`}
+      className={`${inter.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
