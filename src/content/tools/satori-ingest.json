@@ -1,0 +1,15 @@
+{
+  "slug": "satori-ingest",
+  "name": "Satori Ingest",
+  "tagline": "AI 新聞聚合器,推到任何你需要的地方",
+  "description": "Satori Ingest 是 SatoriAI Lab 自用的新聞抓取與摘要管線。每 15 分鐘掃 150+ 個來源(官方部落格、X、論文 RSS、GitHub release),用 LLM 判斷重要性 + 寫成 2 句中文摘要,然後 push 到 SatoriAI 網站、Discord 與 LINE。Phase 2 會開源 webhook 介面,讓任何網站都能接成自己的 News 流。",
+  "githubRepo": "satoriai-lab/satori-ingest",
+  "homepageUrl": null,
+  "language": "Python",
+  "category": "AI Tools",
+  "status": "beta",
+  "featured": true,
+  "sortOrder": 2,
+  "install": "pip install satori-ingest",
+  "problemStatement": "AI 新聞分散在 Twitter / 部落格 / arXiv / Discord 之間,單點訂閱漏訊息,RSS reader 又把所有來源平等對待。Satori Ingest 幫你做兩件事:把噪音過濾掉(LLM 評分 + 去重),以及把訊號 push 到你已經會看的地方(網站 / 聊天工具),不必再多開一個 app。"
+}

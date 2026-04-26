@@ -1,0 +1,15 @@
+{
+  "slug": "prompt-tuner",
+  "name": "Prompt Tuner",
+  "tagline": "把一段 prompt 做 A/B,看哪個版本真的比較好",
+  "description": "Prompt Tuner 是給 builder 用的 prompt 評測工作台:把 baseline prompt 跟你想試的變體一起跑同一組 test case,模型回應自動 diff、自動評分(rubric LLM judge + cost / latency)、把結果存成 markdown report 釘在 repo 裡,讓 prompt 跟 code 一樣有 git history 可以追。",
+  "githubRepo": "satoriai-lab/prompt-tuner",
+  "homepageUrl": null,
+  "language": "TypeScript",
+  "category": "AI Tools",
+  "status": "coming-soon",
+  "featured": true,
+  "sortOrder": 3,
+  "install": "npx prompt-tuner init",
+  "problemStatement": "改 prompt 到目前為止還是非常憑感覺 — 沒人比較變體的真實效果差距,沒人記錄為什麼某個版本被選中。等你回頭想問「我們上一次調 system prompt 是什麼時候、為什麼?」,只剩 Slack 訊息可以翻。Prompt Tuner 把這流程結構化、可重複,並且輸出成可以 commit 的 artifact。"
+}
