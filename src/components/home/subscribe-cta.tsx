@@ -3,20 +3,35 @@
 import { Rss } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 
-import { XIcon } from '@/components/icons/x-icon';
 import { Container } from '@/components/layout/container';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
-const X_HANDLE_URL = 'https://x.com/LL830813';
 const RSS_HREF = '/rss.xml';
 
-export function SubscribeCTA() {
-  const [submitted, setSubmitted] = useState(false);
+type Status = 'idle' | 'submitting' | 'sent' | 'error';
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+export function SubscribeCTA() {
+  const [status, setStatus] = useState<Status>('idle');
+  const [email, setEmail] = useState('');
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+    if (status === 'submitting') return;
+
+    setStatus('submitting');
+    try {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source: 'home_cta', topics: ['ai'] }),
+      });
+      // 後端統一回 200,不論 email 是否已存在
+      setStatus(res.ok ? 'sent' : 'error');
+    } catch {
+      setStatus('error');
+    }
   }
 
   return (
@@ -42,29 +57,30 @@ export function SubscribeCTA() {
               required
               placeholder="you@inbox.com"
               aria-label="你的 email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={status === 'submitting' || status === 'sent'}
               className="h-11 flex-1 bg-bg-card"
             />
             <Button
               type="submit"
               size="lg"
-              className="h-11 px-5"
+              disabled={status === 'submitting' || status === 'sent'}
+              className={cn('h-11 px-5', status === 'sent' && 'pointer-events-none')}
             >
-              訂閱
+              {status === 'submitting' ? '寄送中…' : status === 'sent' ? '已寄出 ✓' : '訂閱'}
             </Button>
           </form>
 
-          {submitted ? (
+          {status === 'sent' ? (
             <p className="text-small text-text-secondary">
-              我們正在準備訂閱系統,先{' '}
-              <a
-                href={X_HANDLE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-brand hover:underline"
-              >
-                <XIcon className="size-3.5" /> follow X
-              </a>{' '}
-              不迷路。
+              如果這個 email 沒訂過,我們已經寄了一封確認信過去 — 點裡面的按鈕完成訂閱。
+            </p>
+          ) : null}
+
+          {status === 'error' ? (
+            <p className="text-small text-warning">
+              網路有點不順,等一下再試一次。
             </p>
           ) : null}
 
