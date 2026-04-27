@@ -197,3 +197,98 @@
     }
   }
 }
+
+/* ── News markdown typography ──────────────────────────────────────── */
+.prose-news {
+  line-height: 1.75;
+}
+.prose-news > * + * {
+  margin-top: 1em;
+}
+.prose-news h2 {
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  color: var(--color-text-primary);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.prose-news h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--color-text-primary);
+  font-size: 16px;
+  font-weight: 500;
+}
+.prose-news a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(61, 123, 204, 0.4);
+  transition: text-decoration-color 150ms;
+}
+.prose-news a:hover {
+  text-decoration-color: var(--color-brand);
+}
+.prose-news code {
+  background: var(--color-bg-elevated);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--color-text-primary);
+}
+.prose-news pre {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 8px;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+}
+.prose-news pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.prose-news ul,
+.prose-news ol {
+  padding-left: 1.5em;
+}
+.prose-news li {
+  margin-top: 0.4em;
+}
+.prose-news ul li {
+  list-style: disc;
+}
+.prose-news ol li {
+  list-style: decimal;
+}
+.prose-news blockquote {
+  border-left: 2px solid var(--color-brand);
+  padding-left: 1em;
+  color: var(--color-text-tertiary);
+  font-style: italic;
+}
+.prose-news hr {
+  border: none;
+  border-top: 1px solid var(--color-border-subtle);
+  margin: 2em 0;
+}
+
+/* ── Realtime news reveal animation ───────────────────────────────── */
+@keyframes news-slide-in {
+  from {
+    transform: translateY(-8px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.news-row-new {
+  animation: news-slide-in 380ms cubic-bezier(0.16, 1, 0.3, 1);
+}

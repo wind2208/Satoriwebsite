@@ -47,6 +47,21 @@ export const metadata: Metadata = {
   alternates: { canonical: '/' },
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'SatoriAI Lab',
+  alternateName: 'SatoriAI 實驗室',
+  url: siteUrl,
+  description:
+    'SatoriAI 實驗室 — 為技術人與內容創作者打造的 AI 工具集。展示開源工具、聚合 AI 新聞,把算力變成現實生產力。',
+  sameAs: [
+    'https://www.youtube.com/@satoriai_lab',
+    'https://x.com/LL830813',
+    'https://github.com/satoriai-lab',
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -60,6 +75,11 @@ export default function RootLayout({
         <Header />
         <div className="flex flex-1 flex-col">{children}</div>
         <Footer />
+        <script
+          type="application/ld+json"
+          // 靜態 organization 結構化資料 — 給搜尋引擎跟 AI 爬蟲識別品牌
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </body>
     </html>
   );

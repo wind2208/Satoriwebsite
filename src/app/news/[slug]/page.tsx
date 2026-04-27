@@ -1,13 +1,14 @@
 import { formatDistanceToNow } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 import { ArrowLeft, ArrowRight, ArrowUpRight } from 'lucide-react';
+import { marked } from 'marked';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 import { Container } from '@/components/layout/container';
 import { Badge } from '@/components/ui/badge';
-import { getAdjacentNews, getNewsBySlug } from '@/lib/news';
+import { getAdjacentNews, getAllNews, getNewsBySlug } from '@/lib/news';
 import { CATEGORY_LABEL } from '@/types/news';
 
 interface PageParams {
@@ -15,6 +16,13 @@ interface PageParams {
 }
 
 export const revalidate = 300;
+
+export async function generateStaticParams() {
+  const news = await getAllNews(50);
+  return news.map((n) => ({ slug: n.slug }));
+}
+
+marked.use({ gfm: true, breaks: false });
 
 export async function generateMetadata({ params }: PageParams): Promise<Metadata> {
   const { slug } = await params;
@@ -39,6 +47,9 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
   };
 }
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+
 export default async function NewsDetailPage({ params }: PageParams) {
   const { slug } = await params;
   const item = await getNewsBySlug(slug);
@@ -50,9 +61,32 @@ export default async function NewsDetailPage({ params }: PageParams) {
     locale: zhTW,
   });
   const categoryLabel = CATEGORY_LABEL[item.category] ?? item.category;
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    headline: item.title,
+    description: item.summary ?? undefined,
+    datePublished: item.published_at,
+    author: {
+      '@type': 'Organization',
+      name: item.source_name ?? 'SatoriAI Lab',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SatoriAI Lab',
+      url: SITE_URL,
+    },
+    mainEntityOfPage: `${SITE_URL}/news/${item.slug}`,
+    articleSection: categoryLabel,
+    inLanguage: 'zh-Hant-TW',
+  };
 
   return (
     <main className="py-12 md:py-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Container>
         <nav aria-label="breadcrumb" className="mb-8 text-small text-text-tertiary">
           <Link href="/news" className="transition-colors hover:text-text-primary">
@@ -85,7 +119,11 @@ export default async function NewsDetailPage({ params }: PageParams) {
           </header>
 
           {item.content ? (
-            <div className="text-body whitespace-pre-line text-text-secondary">{item.content}</div>
+            <div
+              className="prose-news text-body text-text-secondary"
+              // 來源是 server-side 自家 ingest webhook,內容由我們的爬蟲產生
+              dangerouslySetInnerHTML={{ __html: marked.parse(item.content) as string }}
+            />
           ) : null}
 
           {item.source_url ? (
