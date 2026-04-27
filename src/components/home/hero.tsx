@@ -2,7 +2,8 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { Container } from '@/components/layout/container';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export function Hero() {
   return (
@@ -37,23 +38,18 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
-            <Button
-              size="lg"
-              nativeButton={false}
-              render={<Link href="/tools" />}
-              className="px-5"
+            <Link
+              href="/tools"
+              className={cn(buttonVariants({ size: 'lg' }), 'px-5')}
             >
               瀏覽工具 <ArrowRight className="ml-1 size-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              nativeButton={false}
-              render={<Link href="#subscribe" />}
-              className="px-5"
+            </Link>
+            <Link
+              href="#subscribe"
+              className={cn(buttonVariants({ variant: 'outline', size: 'lg' }), 'px-5')}
             >
               訂閱新聞
-            </Button>
+            </Link>
           </div>
         </div>
       </Container>

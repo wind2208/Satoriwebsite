@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 
 import { Logo } from '@/components/brand/logo';
 import { Container } from '@/components/layout/container';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const NAV_ITEMS = [
@@ -58,14 +58,9 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
-          <Button
-            variant="outline"
-            size="sm"
-            nativeButton={false}
-            render={<Link href={SUBSCRIBE_HREF} />}
-          >
+          <Link href={SUBSCRIBE_HREF} className={buttonVariants({ variant: 'outline', size: 'sm' })}>
             訂閱
-          </Button>
+          </Link>
         </div>
 
         <button
@@ -105,15 +100,13 @@ export function Header() {
               </Link>
             );
           })}
-          <Button
-            variant="outline"
-            size="sm"
-            nativeButton={false}
-            render={<Link href={SUBSCRIBE_HREF} onClick={close} />}
-            className="mt-2 self-start"
+          <Link
+            href={SUBSCRIBE_HREF}
+            onClick={close}
+            className={cn(buttonVariants({ variant: 'outline', size: 'sm' }), 'mt-2 self-start')}
           >
             訂閱
-          </Button>
+          </Link>
         </Container>
       </div>
     </header>

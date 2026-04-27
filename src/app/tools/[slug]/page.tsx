@@ -9,7 +9,7 @@ import { GithubIcon } from '@/components/icons/github-icon';
 import { Container } from '@/components/layout/container';
 import { ToolCard } from '@/components/tool-card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { getRepoSnapshot } from '@/lib/github';
 import { getAllTools, getRelatedTools, getToolBySlug } from '@/lib/tools';
@@ -105,35 +105,24 @@ export default async function ToolDetailPage({ params }: PageParams) {
 
             <div className="flex flex-wrap gap-3">
               {tool.githubRepo ? (
-                <Button
-                  size="lg"
-                  nativeButton={false}
-                  render={
-                    <a
-                      href={`https://github.com/${tool.githubRepo}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  }
+                <a
+                  href={`https://github.com/${tool.githubRepo}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ size: 'lg' })}
                 >
                   <GithubIcon className="mr-1 size-4" /> GitHub
-                </Button>
+                </a>
               ) : null}
               {tool.homepageUrl ? (
-                <Button
-                  variant="outline"
-                  size="lg"
-                  nativeButton={false}
-                  render={
-                    <a
-                      href={tool.homepageUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    />
-                  }
+                <a
+                  href={tool.homepageUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: 'outline', size: 'lg' })}
                 >
                   Live demo <ArrowUpRight className="ml-1 size-4" />
-                </Button>
+                </a>
               ) : null}
               {tool.install ? (
                 <CopyButton
