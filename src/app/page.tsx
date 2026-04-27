@@ -8,11 +8,11 @@ import { getFeaturedTools } from '@/lib/tools';
 export default async function HomePage() {
   const tools = await getFeaturedTools(3);
   return (
-    <>
+    <main>
       <Hero />
       <ToolsSection tools={tools} />
       <NewsSection news={MOCK_NEWS} />
       <SubscribeCTA />
-    </>
+    </main>
   );
 }

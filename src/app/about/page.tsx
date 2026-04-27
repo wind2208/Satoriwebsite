@@ -109,9 +109,10 @@ export default function AboutPage() {
         </section>
 
         <section className="mt-20 md:mt-28">
-          <p className="mb-6 text-caption font-medium text-text-tertiary uppercase">
+          <p className="mb-2 text-caption font-medium text-text-tertiary uppercase">
             CONNECT · WITH · US
           </p>
+          <h2 className="mb-8 text-h2 text-text-primary">在這幾個地方都找得到我們</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {CONNECT_CARDS.map((card) => {
               const isExternal = card.external ?? false;
