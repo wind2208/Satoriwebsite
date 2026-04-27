@@ -1,47 +1,92 @@
 import 'server-only';
 
-import { promises as fs } from 'node:fs';
-import path from 'node:path';
-
+import { getServerClient } from '@/lib/supabase/server';
+import type { Database } from '@/lib/supabase/types';
 import type { Tool } from '@/types/tool';
 
-const TOOLS_DIR = path.join(process.cwd(), 'src', 'content', 'tools');
+type ToolRow = Database['public']['Tables']['tools']['Row'];
 
-let cache: Tool[] | null = null;
-
-async function loadTools(): Promise<Tool[]> {
-  if (cache) return cache;
-
-  const files = await fs.readdir(TOOLS_DIR);
-  const items = await Promise.all(
-    files
-      .filter((f) => f.endsWith('.json'))
-      .map(async (f) => {
-        const raw = await fs.readFile(path.join(TOOLS_DIR, f), 'utf8');
-        return JSON.parse(raw) as Tool;
-      }),
-  );
-
-  items.sort((a, b) => a.sortOrder - b.sortOrder);
-  cache = items;
-  return items;
+function rowToTool(row: ToolRow): Tool {
+  return {
+    slug: row.slug,
+    name: row.name,
+    tagline: row.tagline,
+    description: row.description ?? '',
+    githubRepo: row.github_repo,
+    homepageUrl: row.homepage_url,
+    language: row.language,
+    category: row.category ?? 'Misc',
+    status: row.status,
+    featured: row.featured,
+    sortOrder: row.sort_order,
+    install: row.install,
+    problemStatement: row.problem_statement,
+    coverImage: row.cover_image,
+  };
 }
 
 export async function getAllTools(): Promise<Tool[]> {
-  return loadTools();
+  const supabase = getServerClient();
+  const { data, error } = await supabase
+    .from('tools')
+    .select('*')
+    .order('sort_order', { ascending: true });
+
+  if (error) {
+    console.error('[tools] getAllTools failed:', error.message);
+    return [];
+  }
+  return (data ?? []).map(rowToTool);
 }
 
 export async function getToolBySlug(slug: string): Promise<Tool | null> {
-  const tools = await loadTools();
-  return tools.find((t) => t.slug === slug) ?? null;
+  const supabase = getServerClient();
+  const { data, error } = await supabase
+    .from('tools')
+    .select('*')
+    .eq('slug', slug)
+    .maybeSingle();
+
+  if (error) {
+    console.error(`[tools] getToolBySlug(${slug}) failed:`, error.message);
+    return null;
+  }
+  return data ? rowToTool(data) : null;
 }
 
 export async function getFeaturedTools(limit = 3): Promise<Tool[]> {
-  const tools = await loadTools();
-  return tools.filter((t) => t.featured).slice(0, limit);
+  const supabase = getServerClient();
+  const { data, error } = await supabase
+    .from('tools')
+    .select('*')
+    .eq('featured', true)
+    .order('sort_order', { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error('[tools] getFeaturedTools failed:', error.message);
+    return [];
+  }
+  return (data ?? []).map(rowToTool);
 }
 
-export async function getRelatedTools(slug: string, category: string, limit = 2): Promise<Tool[]> {
-  const tools = await loadTools();
-  return tools.filter((t) => t.slug !== slug && t.category === category).slice(0, limit);
+export async function getRelatedTools(
+  slug: string,
+  category: string,
+  limit = 2,
+): Promise<Tool[]> {
+  const supabase = getServerClient();
+  const { data, error } = await supabase
+    .from('tools')
+    .select('*')
+    .eq('category', category)
+    .neq('slug', slug)
+    .order('sort_order', { ascending: true })
+    .limit(limit);
+
+  if (error) {
+    console.error(`[tools] getRelatedTools(${slug}) failed:`, error.message);
+    return [];
+  }
+  return (data ?? []).map(rowToTool);
 }
