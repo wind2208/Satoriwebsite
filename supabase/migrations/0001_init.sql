@@ -114,10 +114,17 @@ create policy "anyone can subscribe" on public.subscribers
   for insert to anon, authenticated with check (true);
 
 -- ── GRANTs(autoexpose 關掉所以要顯式給) ─────────────────────────────────
-grant usage on schema public to anon, authenticated;
+grant usage on schema public to anon, authenticated, service_role;
+
+-- anon / authenticated: read-only for tools & news, insert-only for subscribers
 grant select on public.tools to anon, authenticated;
 grant select on public.news  to anon, authenticated;
 grant insert on public.subscribers to anon, authenticated;
+
+-- service_role: full CRUD for server route handlers (subscribe confirm/unsubscribe, news ingest)
+grant select, insert, update, delete on public.subscribers to service_role;
+grant select, insert, update, delete on public.news to service_role;
+grant select on public.tools to service_role;
 
 -- ── Realtime ──────────────────────────────────────────────────────────────
 -- 把 news 表加進 realtime publication,讓 client 可以訂閱新筆資料
