@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PageParams): Promise<Metadata
 }
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org';
 
 export default async function NewsDetailPage({ params }: PageParams) {
   const { slug } = await params;

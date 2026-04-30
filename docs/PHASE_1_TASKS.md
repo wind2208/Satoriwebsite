@@ -286,7 +286,7 @@ export default async function HomePage() {
 
 ```ts
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.lab'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org'),
   title: {
     default: 'SatoriAI Lab — 把 AI 算力變成現實生產力',
     template: '%s · SatoriAI Lab',
@@ -330,7 +330,7 @@ Phase 4 再做動態。
 1. Push 到 GitHub repo `satoriai-lab/website`(public 或 private 看你)
 2. Vercel import → 一鍵部署
 3. 設環境變數:`GITHUB_TOKEN`、`NEXT_PUBLIC_SITE_URL=https://你的域名`
-4. 自訂域名(`satoriai.lab` 或 `lab.satoriai.xyz` 或暫用 vercel.app subdomain)
+4. 自訂域名:`satoriai.org`(apex + `www` redirect 到 apex)
 5. 確認 production build 沒 error
 
 驗收:production URL 開得起來,所有頁面 200,Lighthouse 達標。

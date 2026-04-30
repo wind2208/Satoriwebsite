@@ -85,7 +85,7 @@ export default function OgImage() {
             fontSize: 22,
           }}
         >
-          <span>satoriai.lab</span>
+          <span>satoriai.org</span>
           <span>@LL830813 · @satoriai_lab</span>
         </div>
       </div>

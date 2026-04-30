@@ -3,7 +3,7 @@ import 'server-only';
 import { Resend } from 'resend';
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org';
 
 const FROM = process.env.RESEND_FROM_EMAIL ?? 'SatoriAI Lab <onboarding@resend.dev>';
 
@@ -48,7 +48,7 @@ ${inner}
 <hr style="${baseStyles.hr}" />
 <p style="${baseStyles.small}">SatoriAI Lab · 把 AI 算力,變成現實生產力</p>
 <p style="${baseStyles.small}">
-<a href="${SITE_URL}" style="${baseStyles.link}">satoriwebsite.vercel.app</a> ·
+<a href="${SITE_URL}" style="${baseStyles.link}">satoriai.org</a> ·
 <a href="https://www.youtube.com/@satoriai_lab" style="${baseStyles.link}">YouTube</a> ·
 <a href="https://x.com/LL830813" style="${baseStyles.link}">X</a>
 </p>

@@ -65,7 +65,7 @@ Phase 1 已部署。請讀 docs/SPEC.md §F.Phase 2,擬一份 docs/PHASE_2_TASKS
 
 1. **GitHub repo**:建一個 `satoriai-lab/website`(或你想的名字)的空 repo,把 token 拿到
 2. **Vercel 帳號**:登入並連 GitHub
-3. **域名**:決定要用 satoriai.lab、lab.satoriai.xyz 還是其他;先在 Vercel 直接拿 `*.vercel.app` 也行
+3. **域名**:已選定 `satoriai.org`(2026-04 購入);Vercel 部署初期可先用 `*.vercel.app` subdomain,域名綁定流程見 `docs/DOMAIN_SETUP.md`(若已建立)或 Phase 1 Task 9
 4. **GitHub Personal Access Token**:給網站匿名 fetch repo stats 用(`public_repo` scope 就夠),寫進 Vercel env
 5. **Logo 檔案**:把現有的腦袋 logo 切一份 SVG 跟 PNG(透明底)放進 `public/brand/` — Claude Code 會用到
 6. **品牌封面圖**:YouTube banner 那張可以放進 `public/brand/cover.jpg`,Phase 1 OG image 會用到

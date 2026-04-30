@@ -1,6 +1,6 @@
 import { getAllNews } from '@/lib/news';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org';
 
 export const revalidate = 300;
 

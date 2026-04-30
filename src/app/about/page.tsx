@@ -63,9 +63,9 @@ const CONNECT_CARDS: ConnectCard[] = [
     external: true,
   },
   {
-    href: 'mailto:hello@satoriai.lab',
+    href: 'mailto:hello@satoriai.org',
     label: 'Email',
-    handle: 'hello@satoriai.lab',
+    handle: 'hello@satoriai.org',
     description: '合作、媒體、想跟我們講話 — 寫信最快。',
     Icon: Mail,
   },

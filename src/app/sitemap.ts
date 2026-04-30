@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 import { getAllNews } from '@/lib/news';
 import { getAllTools } from '@/lib/tools';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [tools, news] = await Promise.all([getAllTools(), getAllNews(50)]);

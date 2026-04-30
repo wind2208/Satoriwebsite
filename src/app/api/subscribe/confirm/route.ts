@@ -9,7 +9,7 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriwebsite.vercel.app';
+  process.env.NEXT_PUBLIC_SITE_URL ?? 'https://satoriai.org';
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get('token');

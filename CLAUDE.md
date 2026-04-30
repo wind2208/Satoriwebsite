@@ -192,7 +192,7 @@ SUPABASE_SERVICE_ROLE_KEY=
 
 # Resend
 RESEND_API_KEY=
-RESEND_FROM_EMAIL=hello@satoriai.lab
+RESEND_FROM_EMAIL=hello@satoriai.org
 
 # News ingestion
 NEWS_INGEST_SECRET=
@@ -201,7 +201,7 @@ NEWS_INGEST_SECRET=
 GITHUB_TOKEN=
 
 # Site
-NEXT_PUBLIC_SITE_URL=https://satoriai.lab
+NEXT_PUBLIC_SITE_URL=https://satoriai.org
 ```
 
 提交一份 `.env.example`(空值)到 git。
