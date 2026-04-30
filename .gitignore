@@ -40,3 +40,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Kenaz tasks & logs — NOT synced via git
+# Share tasks with your team using the Yggdrasil Task Pool instead
+.kenaz/tasks/
+.kenaz/logs/
